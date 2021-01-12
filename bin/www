@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('l10handson:server');
+var debug = require('debug')('jeffs-express-bulletinboard:server');
 var http = require('http');
 
 /**
