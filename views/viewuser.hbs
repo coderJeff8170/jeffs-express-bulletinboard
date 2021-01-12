@@ -1,0 +1,13 @@
+<div class="card">
+    <div class="card-header d-flex justify-content-between">
+        <h5 class="card-title">{{username}}</h5>
+    </div>
+    <div class="card-body">
+        <p class="card-text">First Name: {{firstname}}</p>
+        <p class="card-text">Last Name: {{lastname}}</p>
+        <p class="card-text">email: {{email}}</p>
+        <form method="GET" action="/users/profile">
+            <button type="submit" class="btn btn-sm btn-outline-primary">Back</button>
+        </form>
+    </div>
+</div>

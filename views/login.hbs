@@ -1,0 +1,20 @@
+{{!-- Put nav here --}}
+{{!-- <div>
+    <span><a href="/users/login">Login</a> |</span>
+    <span><a href="/users/signup">Signup</a></span>
+    <hr>
+<div> --}}
+<h2 class="text-center">{{message}}</h2>
+<form method="POST" action="/users/login" id="login" name="login">
+    <div class="form-group">
+        <label for="username">User Name:</label>
+        <input class="form-control" type="text" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input class="form-control" type="password" id="password" name="password" required>
+    </div>
+    <div class="form-group d-flex justify-content-end">
+        <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+</form>

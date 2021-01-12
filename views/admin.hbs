@@ -1,0 +1,69 @@
+
+<h2 class="text-center">Hello Administrator {{firstname}} {{lastname}}!</h2>
+<div class="row d-flex justify-content-around">
+    <h5>Email: {{email}}</h5>
+    <h5>Username: {{username}}</h5>
+    <form method="GET" action="/users/logout" id="logout" name="logout">
+        <div>
+            <button type="submit" class="btn btn-sm btn-outline-secondary">Logout</button>
+        </div>
+    </form>
+</div>
+
+<hr>
+{{!-- List of 'undeleted' users to go here: --}}
+{{!-- make sure this list does NOT include admins --}}
+<h3 class="text-center">Users:</h3>
+    <div>
+        {{#each users}}
+        {{#if Admin}}
+        {{else}}
+        <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <h5 class="card-title"><a href="/users/admin/editUser/{{UserId}}">{{FirstName}} {{LastName}}</a></h5>
+            <div class="row">
+                <form method="POST" action="/users/{{UserId}}" 
+                    onsubmit="return confirm('Are you sure you want to delete this user?');">
+                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                </form>
+            </div>
+            
+        </div>
+        </div>
+        {{/if}}
+    {{/each}}
+    </div>
+    
+
+
+<hr>
+<h3 class="text-center">Posts you have authored:</h3>
+{{!-- List of posts written by this user should be displayed here --}}
+<div>
+    {{#each posts}}
+        <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <h5 class="card-title">{{PostTitle}}</h5>
+            <div class="row">
+                <form method="GET" action="/posts/editpost/{{PostId}}">
+                    <button type="submit" class="btn btn-sm btn-outline-primary">Edit</button>
+                </form>
+                <form method="GET" action="/posts/deletepost/{{PostId}}" 
+                    onsubmit="return confirm('Are you sure you want to delete this post?');">
+                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                </form>
+            </div>
+            
+        </div>
+        <div class="card-body">
+            
+            <p class="card-text">{{PostBody}}</p>
+        <div class="row d-flex justify-content-around">
+            
+        </div>
+        </div>
+        </div>
+    {{/each}}
+</div>
+    
+

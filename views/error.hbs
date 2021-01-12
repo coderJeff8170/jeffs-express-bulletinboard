@@ -1,0 +1,23 @@
+<div class="col">
+    <h1 class="text-center">{{message}}</h1>
+
+      <p class="text-center">Go To Profile:</p>
+        <div class="d-flex justify-content-center ">
+            <form method="GET" action="/users/profile" id="profile" name="profile">
+                <div>
+                    <button type="submit" class="btn btn-lg btn-success">Go!</button>
+                </div>
+            </form>
+        </div>
+        <p class="text-center">Start over:</p>
+        <div class="d-flex justify-content-center ">
+            <form method="GET" action="/" id="home" name="home">
+                <div>
+                    <button type="submit" class="btn btn-sm btn-success">Home!</button>
+                </div>
+            </form>
+        </div>
+</div>
+
+{{!-- <h2>{{error.status}}</h2>
+<pre>{{error.stack}}</pre> --}}

@@ -1,0 +1,14 @@
+<h3>Edit Post</h3>
+<form method="POST" action="/posts/updatepost/{{post.PostId}}" id="editPost" name="editPost">
+    <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" placeholder={{post.PostTitle}}required>
+    </div>
+    <div>
+        <label for="body">Body:</label>
+        <textarea type="text" id="body" name="body" placeholder={{post.PostBody}}required></textarea>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>

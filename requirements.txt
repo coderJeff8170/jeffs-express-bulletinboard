@@ -1,0 +1,200 @@
+Requirements
+Step 1
+Create an Express application with the Express generator[X]
+
+This application should be named L10HandsOn and should live within your 
+Express-Course directory [X]
+
+Install all needed dependencies
+This application should use Sequelize as its ORM
+
+therefore: 
+npm install [X]
+npm install --save mysql2 [X]
+npm install --save sequelize@4.43.0 [X]
+npm install --save jsonwebtoken [X]
+npm install --save bcryptjs [X]
+    all three above together: npm install --save mysql2 sequelize@4.43.0 jsonwebtoken
+npm install sequelize-cli [X]
+sequelize init [X]
+TODO: define timestamps!
+
+
+Step 2
+Create a new MySQL database called bulletinboard
+
+setup config file first then. [X]
+
+Since no database has been created yet you can create the database defined
+in your config.json file by using the following command:
+
+sequelize db:create work:[X] home:
+
+Step 3 (7:3 to create models for an empty db)
+
+Run migrations to create two new tables: users and posts [X]
+
+These tables should have the following structure:
+
+sequelize model:generate --name users --attributes UserId:integer,FirstName:string,LastName:string,Username:string,Password:string,Email:string,Admin:boolean
+^^done
+users:
+UserId: integer, autoincrement, primary key, not null [X]
+FirstName: string
+LastName: string
+Username: string, unique [X]
+Password: string
+Email: string, unique [X]
+Admin: boolean, default value is false, not null [X]
+createdAt: date, not null <= these are created automatically
+updatedAt: date, not null <= these are created automatically
+
+posts:
+PostId: integer, autoincrement, primary key, not null [X]
+PostTitle: string
+PostBody: string
+UserId: integer, foreign key to UserId in users table <= wot? this is misleading. Association is defined elsewhere.
+createdAt: date, not null <= these are created automatically
+updatedAt: date, not null <= these are created automatically
+
+sequelize model:generate --name posts --attributes PostId:integer,PostTitle:string,PostBody:string,UserId:integer
+^^done
+Step 4
+Update models to reflect the create table migrations [X]
+
+ran initial migration here. [X] 
+makemigration --name initial_migration
+
+Don't forget the associations Lesson 6:4 - it defines relationships with a thru table tho :/
+this SHOULD, theoretically, be easier...
+
+A post hasOne User.
+A user hasMany Posts.
+
+To create a One-To-Many relationship, the hasMany and belongsTo associations are used together;
+
+Create a new folder in your "models" folder called rel. [X]
+This will be the folder where you hold any files pertaining to relationships between models.
+
+Create a file in your rel folder called associations.js.  [X]
+You will define the relationships between your "users" and "posts" models in this file.
+
+Make another migration after associations are done.[X]
+
+Migrate to the database. Do it when you get home too after a git pull.[X]
+
+
+Step 5
+Users should be able to Signup/Login/Logout[X]
+these are users so they should be on the users.js route
+
+Make signup view [X]
+Make signup GET route [X]
+Make signup POST route [X]
+
+Make login view [X]
+Make login GET route[X]
+Make login POST route[X]
+
+Make logout route - present but needs changed [X]
+make it expire cookie and set to empty string. [X]
+Make a logout button [X]
+
+Use JWT for secure login (and use hashing and salting for passwords)
+this means -> 
+
+    installing jsonwebtoken(shoulda done it at beginning.. added to start of sheet)
+    create a services folder with auth.js in it [X]
+
+    hook up to the login route[x]
+
+    Authentication service validation function 'verifyUser' added to auth.js[X]
+
+    configure routes to use verifyUser to secure them (profile)[X]
+
+    TODO: verify that there is a jwt token on the Request[X] - on profile request anyways
+    install and require bcryptjs[X]
+
+    npm install --save bcrypt(again, do at beginning)[X]
+
+    require bcrypt in the auth file, and make sure auth file is linked to route file[X]
+
+    add hash password function to auth js [X]
+    
+    use this function in SIGNUP POST route instead of password: req.body.password[X]
+    eg: Password: authService.hashPassword(req.body.password) 
+        ^^this will gobbledegook the password in the db
+
+        make sure it works before proceeding [X]
+
+    TODO: add compare passwords functions to auth.js [X]
+
+    TODO: add compare passwords function to user login route[x]
+        test again.[X]
+
+Step 5.5
+Create a cheap navbar![X]
+create a list of anchor tags with hrefs pointing to:
+    Profile | Posts | Login | Signup
+    **horizontal rule here**
+    rest of page.. 
+Test it.[X]
+Add it to rest of hbs files...[X]
+
+TODO: explore template/fragent possibilities
+
+
+Step 6
+Users should be able to create, edit, and delete (what?) -> POSTS!
+
+Probably should: Create a posts route to store the post routes.[X]
+YES - Tyler does not have users/posts, he's got /posts - I guess that makes sense as
+posts is not a subclass of users...
+Get it rendering first.[X]
+
+
+All posts should show up on a posts page [X]
+TODO: Maybe have three tabs - All, Others, Mine?
+
+Be able to click on a post to update or delete it[X]
+
+Post edit button[X]
+Post edit route
+
+Post delete button[X]
+Post delete route[X]
+
+
+Run a migration to add a Deleted column [X]
+After the post has been deleted, redirect the user to their profile page[X]
+
+Step 7
+Users should be able to view their profile page. Their profile page should render the following:
+
+Their full name[X]
+Their username[X]
+
+TODO: The posts they have written - need to be filtered by user Id once column is working
+
+Step 8
+Admin users should be able to see a list of all users that have not been deleted
+by the user's first and last name[X]
+
+Run another migration to add a Deleted column[X]
+Render a different hbs file for the Admin profile page, which should list all users[X]
+Every Admin should see the same page. Use the route /users/admin[X]
+
+Step 9
+Admin users should be able to click on a user and view their information, but not edit their information[X]
+
+TODO: make each user a link to this route vv
+Use the route /users/admin/editUser/:id[X]
+
+Step 10
+Admin users should be able to Delete Users[X]
+
+Admin users should be able to Delete Posts[X]
+
+Step 11
+Add some styling to your application so it is unique to your taste[X]
+
